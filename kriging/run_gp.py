@@ -1,18 +1,16 @@
 """
 This script runs GP with a LOO-CV cut short by applying
-the Cholesky decomposition only once to the full matrix
-and, based on the (Woodbury) matrix inversion lemma, still 
-deriving the inverse of submatrices from a rank-one removal, 
-i.e., when one row and column were dropped.
+the Cholesky decomposition only once to the full matrix.
 
-Obviously, this strategy applies the resource-intensive 
-decomposition only once and thus reduces the complexity from
-O(n^4) to O(n^3).
+Hyperparameters are pre-set, which will be improvement,
+i.e., optimized, in the next version of this script.
 
 The entire GP procedure follows the work of: 
 C. E. Rasmussen & C. K. I. Williams. 
 Gaussian Processes for Machine Learning. 
 The MIT Press, 2006 (ISBN 026218253X).
+
+See 'https://github.com/barmakmostofian/carnot' for refrence.
 
 The corresponding GP equations in matrix notation are:
 μ* = k*ᵀ · (K + σ²ₙI)⁻¹ · y
@@ -113,15 +111,9 @@ for i, a in enumerate(alpha):
 
 
 # ------------------------------------------------------------------
-# Run LOO shortcut, algebraically replacing matrix decompositions
+# Run LOO, algebraically replacing matrix decompositions
 # ------------------------------------------------------------------
     
-# This strategy is based on obtaining the diagonal values of K^{-1} and
-# using the notion that, in LOO-CV, each data point serves as test data once
-# and thus, k_star and k_starstar (see 'run_gp_loocv_naive.py') can be 
-# algebraically incorportated into equations that directly derive the 
-# posterior mean and variance.
-
 # To obtain K^{-1}, we solve a system of n linear equations: 
 # K . x_i = e_i, where e_i is the i-th column of the identity matrix.
 # The i-th entry of x_i must be [K^{-1}]_ii, i.e., the i-th entry of 
@@ -168,8 +160,6 @@ print("  Done.")
 # ------------------------------------------------------------------
 # Compute performance metrics
 # ------------------------------------------------------------------
-
-# See 'run_gp_loocv_naive.py' for some reference
 
 errors   = loo_mu - obs_values
 abs_err  = np.abs(errors)
