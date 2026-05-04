@@ -5,12 +5,12 @@ the Cholesky decomposition only once to the full matrix.
 Hyperparameters are pre-set, which will be improvement,
 i.e., optimized, in the next version of this script.
 
+See 'https://github.com/barmakmostofian/carnot' for reference.
+
 The entire GP procedure follows the work of: 
 C. E. Rasmussen & C. K. I. Williams. 
 Gaussian Processes for Machine Learning. 
 The MIT Press, 2006 (ISBN 026218253X).
-
-See 'https://github.com/barmakmostofian/carnot' for refrence.
 
 The corresponding GP equations in matrix notation are:
 μ* = k*ᵀ · (K + σ²ₙI)⁻¹ · y
