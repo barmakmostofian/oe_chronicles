@@ -2,8 +2,8 @@
 This script runs GP with a LOO-CV cut short by applying
 the Cholesky decomposition only once to the full matrix.
 
-Hyperparameters are pre-set, which will be improvement,
-i.e., optimized, in the next version of this script.
+Hyperparameters are pre-set, which will be improved, i.e., 
+optimized, in the next version of this script.
 
 See 'https://github.com/barmakmostofian/carnot' for reference.
 
