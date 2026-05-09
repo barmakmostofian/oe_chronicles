@@ -90,7 +90,7 @@ print(f"  {np.round(np.diag(K), 4)}")
 check_pd(K)
 
 # Factorize K
-K_factor, Lower_tri = factorize(K)
+K_factor, lower_bool, Lower_tri = factorize(K)
 
 print("\n  Lower triangular factor of the Kriging matrix, first 5 x 5 block:")
 print(np.round(Lower_tri[:5, :5], 4))
@@ -103,7 +103,7 @@ print(np.round(Lower_tri[:5, :5], 4))
 # ------------------------------------------------------------------
 
 print(f"\nComputing alpha = K^{{-1}} . y via forward + backward substitution ...")
-alpha = linalg.cho_solve((K_factor, Lower_tri), y)
+alpha = linalg.cho_solve((K_factor, lower_bool), y)
 
 print(f"  alpha (adjusted weight vector):")
 for i, a in enumerate(alpha):
@@ -129,7 +129,7 @@ for i, a in enumerate(alpha):
 
 print(f"\nComputing diagonal of K^{{-1}} ({n} triangular solves) ...")
 I_matrix   = np.eye(n)
-K_inv      = linalg.cho_solve((K_factor, Lower_tri), I_matrix)
+K_inv      = linalg.cho_solve((K_factor, lower_bool), I_matrix)
 K_inv_diag = np.diag(K_inv)
 
 print(f"  Diagonal of K^{{-1}}:")
